@@ -1,0 +1,255 @@
+
+# Assign colors         (Border/Background/Text/Indicator)
+client.focused          #3465A4 #116A9D #EEEEEC #3465A487
+client.focused_inactive #555753 #555753 #BABDB6 #888A85
+client.unfocused        #555753 #2E3436 #BABDB6 #888A85
+client.urgent           #EF2929 #CC0000 #EEEEEC #EF2929
+
+set $mod Mod4
+font pango:Sans 9
+# Floating and border rules
+for_window [class="^.*"] border pixel 2
+
+for_window [class="Thunar"] floating enable
+for_window [class="Qstardict"] floating enable
+for_window [class="Audacious"] floating enable
+for_window [class="Engrampa"] floating enable
+for_window [class="feh"] floating enable
+for_window [class="Bless"] floating enable
+for_window [class="Leafpad"] floating enable
+for_window [class="Galculator"] floating enable
+for_window [class="Smplayer2"] floating enable
+for_window [class="Gnome-font-viewer"] floating enable 
+for_window [class="Termite"] floating enable
+for_window [class="Arandr"] floating enable
+for_window [class="Pavucontrol"] floating enable
+for_window [class="XTerm"] floating enable
+for_window [class="Subl3"] floating enable
+for_window [class="Pidgin"] floating enable
+for_window [class="Telegram"] floating enable
+
+for_window [class="google-chrome"] border none
+for_window [class="Termite"] border 1pixel
+for_window [class="feh"] border pixel 3
+for_window [class="XTerm"] border 1pixel
+for_window [class="opsu!"] fullscreen
+for_window [class="Zathura"] border none
+for_window [class="Gimp"] border 1pixel
+#Ignore notification focus 
+no_focus [class="Xfce4-notifyd"]
+#for_window [class="Xfce4-notifyd"] no_focus
+#for_window [class="Xfce4-notifyd"] border pixel 1
+
+#Sticky windows 
+for_window [class="Audacious"] sticky enable
+#for_window [class="Thunar"] sticky enable
+
+#GAPS
+workspace 1 gaps inner 6 
+workspace 1 gaps outer 6
+
+workspace 2 gaps inner 6
+workspace 2 gaps outer 6
+
+#moving floating windows
+mode "moving" {
+    bindsym $mod+Tab focus right
+    bindsym k move up 4px
+    bindsym h move left 4px
+    bindsym j move down 4px
+    bindsym l move right 4px
+    bindsym Up move up 20px
+    bindsym Down move down 20px
+    bindsym Left move left 20px
+    bindsym Right move right 20px
+    bindsym $mod+t mode "default"
+    bindsym Escape mode "default"
+}
+
+bindsym Mod4+t focus floating; mode "moving"
+
+mode "gaps" {
+	bindsym Up  gaps inner current minus 5
+	bindsym Down gaps inner current plus 5
+	bindsym Left gaps outer current plus 5
+	bindsym Right gaps outer current minus 5
+	bindsym 0     gaps inner current set 0
+	bindsym space gaps outer current set 0; gaps inner current set 0
+
+	bindsym Escape mode "default"
+	bindsym Return mode "default"
+}
+
+bindsym $mod+d mode "gaps"
+#Autostart program
+
+exec --no-startup-id "compton -b"
+exec --no-startup-id "thunar --daemon &"
+exec --no-startup-id "urxvtd -q -o"
+exec --no-startup-id "start-pulseaudio-x11"
+exec --no-startup-id "/usr/lib/polkit-gnome/gtkpolkit &"
+exec --no-startup-id "~/.fehbg"
+exec --no-startup-id "ibus-daemon -drx"
+exec --no-startup-id "/usr/lib/xfce4/notifyd/xfce4-notifyd &"
+exec --no-startup-id "unclutter -root"
+exec --no-startup-id "numlockx"
+exec --no-startup-id "xfce4-volumed-pulse"
+exec --no-startup-id "runonce redshift"
+
+focus_follows_mouse no
+# Use Mouse+$mod to drag floating windows to their wanted position
+floating_modifier $mod
+
+# start a terminal
+bindsym $mod+Return exec urxvtc
+bindsym $mod+backslash exec xterm
+# kill focused window
+bindsym $mod+Shift+q kill
+# start dmenu (a program launcher)
+bindsym $mod+Shift+f exec --no-startup-id "j4-dmenu-desktop --display-binary --dmenu='dmenu -b -i'"
+
+bindsym $mod+o move workspace to output right
+# change focus
+bindsym $mod+h focus left
+bindsym $mod+j focus down
+bindsym $mod+k focus up
+bindsym $mod+l focus right
+
+# alternatively, you can use the cursor keys:
+bindsym $mod+Left focus left
+bindsym $mod+Down focus down
+bindsym $mod+Up focus up
+bindsym $mod+Right focus right
+
+# move focused window
+bindsym $mod+Shift+h move left
+bindsym $mod+Shift+j move down
+bindsym $mod+Shift+k move up
+bindsym $mod+Shift+l move right
+
+# alternatively, you can use the cursor keys:
+bindsym $mod+Shift+Left move left
+bindsym $mod+Shift+Right move right
+
+# split in horizontal orientation
+bindsym $mod+c split h
+
+# split in vertical orientation
+bindsym $mod+x split v
+
+# enter fullscreen mode for the focused container
+bindsym $mod+f fullscreen toggle
+
+# change container layout (stacked, tabbed, toggle split)
+bindsym $mod+s layout stacking
+bindsym $mod+w layout tabbed
+bindsym $mod+e layout toggle split
+
+# toggle tiling / floating
+bindsym $mod+Shift+space floating toggle
+bindsym $mod+q focus mode_toggle
+
+# toggle sticky / normal 
+
+bindsym $mod+Shift+s sticky toggle
+
+#############MY DESKTOP################
+
+bindsym $mod+z move scratchpad
+bindsym $mod+a scratchpad show
+
+bindsym $mod+Shift+i exec 'smplayer2'
+bindsym $mod+Shift+apostrophe exec "qstardict"
+bindsym $mod+Shift+p exec "thunar"
+bindsym XF86Calculator exec "galculator"
+bindsym $mod+Shift+o exec "google-chrome"
+bindsym XF86WWW exec "gnome-screenshot -i"
+bindsym Print exec "scrot"
+bindsym XF86Display exec "arandr"
+bindsym $mod+m exec "i3lock -i ~/.i3/lock.png"
+
+##############MPD###############
+
+bindsym XF86AudioPlay exec "mpc toggle"
+bindsym XF86AudioNext exec "mpc next"
+bindsym XF86AudioPrev exec "mpc prev"
+bindsym XF86AudioStop exec "mpc stop"
+
+##############IBUS################
+
+bindsym $mod+space exec "ibus engine 'xkb:us::eng'"
+bindsym $mod+g exec "ibus engine 'anthy'"
+bindsym $mod+v exec "ibus engine 'Unikey'"
+
+# focus container
+bindsym $mod+Tab focus left
+bindsym $mod+Shift+Tab focus up
+
+# switch to workspace
+bindsym $mod+1 workspace 1
+bindsym $mod+2 workspace 2
+bindsym $mod+3 workspace 3
+bindsym $mod+4 workspace 4
+bindsym $mod+5 workspace 5
+bindsym $mod+6 workspace 6
+bindsym $mod+7 workspace 7
+bindsym $mod+8 workspace 8
+bindsym $mod+9 workspace 9
+bindsym $mod+0 workspace 10
+
+# move focused container to workspace
+bindsym $mod+Shift+1 move container to workspace 1
+bindsym $mod+Shift+2 move container to workspace 2
+bindsym $mod+Shift+3 move container to workspace 3
+bindsym $mod+Shift+4 move container to workspace 4
+bindsym $mod+Shift+5 move container to workspace 5
+bindsym $mod+Shift+6 move container to workspace 6
+bindsym $mod+Shift+7 move container to workspace 7
+bindsym $mod+Shift+8 move container to workspace 8
+bindsym $mod+Shift+9 move container to workspace 9
+bindsym $mod+Shift+0 move container to workspace 10
+
+
+# reload the configuration file
+bindsym $mod+Shift+b reload
+# restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
+bindsym $mod+Shift+r restart
+
+bindsym $mod+Shift+e exec "~/Public/Shell_tools/exit_i3"
+# resize window (you can also use the mouse for that)
+mode "resize" {
+        bindsym h resize shrink width 2 px or 2 ppt
+        bindsym j resize grow height 2 px or 2 ppt
+        bindsym k resize shrink height 2 px or 2 ppt
+        bindsym l resize grow width 2 px or 2 ppt
+
+        bindsym Left resize shrink width 2 px or 2 ppt
+        bindsym Down resize grow height 2 px or 2 ppt
+        bindsym Up resize shrink height 2 px or 2 ppt
+        bindsym Right resize grow width 2 px or 2 ppt
+
+        # back to normal: Enter or Escape
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
+
+bindsym $mod+r mode "resize"
+
+# Start i3bar to display a workspace bar (plus the system information i3status
+# finds out, if available)
+bar {
+	i3bar_command i3bar
+	status_command i3status
+	font pango:"Sans" 8
+	height 16
+#output HDMI1
+    colors {
+        background         #090909
+        focused_workspace  #4c7899 #4c7899 #111111
+        active_workspace   #333333 #5f676a #ffffff
+        urgent_workspace   #2f343a #900000 #ffffff
+    }
+}
+
+bindsym $mod+n bar mode toggle
+bindsym $mod+i bar mode invisible
