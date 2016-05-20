@@ -39,12 +39,12 @@ for_window [class="opsu!"] fullscreen
 for_window [class="Zathura"] border 1pixel
 for_window [class="Gimp"] border 1pixel
 #Ignore notification focus 
-no_focus [class="Xfce4-notifyd"]
+#no_focus [class="Xfce4-notifyd"]
 #for_window [class="Xfce4-notifyd"] no_focus
 #for_window [class="Xfce4-notifyd"] border pixel 1
 
 #Sticky windows 
-for_window [class="Audacious"] sticky enable
+#for_window [class="Audacious"] sticky enable
 #for_window [class="Thunar"] sticky enable
 
 #GAPS
@@ -72,10 +72,10 @@ mode "moving" {
 bindsym Mod4+t focus floating; mode "moving"
 
 mode "gaps" {
-	bindsym Up  gaps inner current minus 5
-	bindsym Down gaps inner current plus 5
-	bindsym Left gaps outer current plus 5
-	bindsym Right gaps outer current minus 5
+	bindsym k gaps inner current minus 5
+	bindsym j gaps inner current plus 5
+	bindsym h gaps outer current plus 5
+	bindsym l gaps outer current minus 5
 	bindsym 0     gaps inner current set 0
 	bindsym space gaps outer current set 0; gaps inner current set 0
 
@@ -93,11 +93,11 @@ exec --no-startup-id "start-pulseaudio-x11"
 exec --no-startup-id "/usr/lib/polkit-gnome/gtkpolkit &"
 exec --no-startup-id "~/.fehbg"
 exec --no-startup-id "ibus-daemon -drx"
-exec --no-startup-id "/usr/lib/xfce4/notifyd/xfce4-notifyd &"
 exec --no-startup-id "unclutter -root"
 exec --no-startup-id "numlockx"
 exec --no-startup-id "xfce4-volumed-pulse"
 exec --no-startup-id "runonce redshift"
+exec --no-startup-id "nm-applet"
 
 focus_follows_mouse no
 # Use Mouse+$mod to drag floating windows to their wanted position
