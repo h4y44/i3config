@@ -1,3 +1,4 @@
+#vi:setf conf
 
 client.focused			#3465A4 #116A9D #EEEEEC #3465A487
 client.focused_inactive #555753 #555753 #BABDB6 #888A85
@@ -108,8 +109,8 @@ bindsym $mod+Shift+Right move right
 bindsym $mod+c split h
 bindsym $mod+x split v
 bindsym $mod+f fullscreen toggle
-bindsym $mod+s layout stacking
-bindsym $mod+w layout tabbed
+#bindsym $mod+s layout stacking
+#bindsym $mod+w layout tabbed
 bindsym $mod+e layout toggle split
 bindsym $mod+Shift+space floating toggle
 bindsym $mod+q focus mode_toggle
