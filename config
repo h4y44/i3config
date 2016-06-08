@@ -13,22 +13,22 @@ for_window [class="Qstardict"] floating enable
 for_window [class="Audacious"] floating enable
 for_window [class="Engrampa"] floating enable
 for_window [class="feh"] floating enable
-for_window [class="Bless"] floating enable
+for_window [class="Gnome-mpv"] floating enable
 for_window [class="Textadeptjit"] floating enable
 for_window [class="Galculator"] floating enable
 for_window [class="Smplayer2"] floating enable
 for_window [class="Gnome-font-viewer"] floating enable
-for_window [class="Termite"] floating enable
+for_window [class="Ghex"] floating enable
 for_window [class="Arandr"] floating enable
 for_window [class="Pavucontrol"] floating enable
 for_window [class="XTerm"] floating enable
-for_window [class="Subl3"] floating enable
-for_window [class="Pidgin"] floating enable
+for_window [class="Transmission-gtk"] floating enable
 for_window [class="Telegram"] floating enable
 for_window [class="Lxtask"] floating enable
 for_window [class="MuPDF"] floating enable
 for_window [class="Nomacs"] border none
-for_window [class="google-chrome"] border none
+for_window [class="chromium"] border none
+for_window [class="Firefox"] border none
 for_window [class="Termite"] border 1pixel
 for_window [class="feh"] border pixel 3
 for_window [class="XTerm"] border 1pixel
@@ -71,18 +71,20 @@ mode "gaps" {
 }
 bindsym $mod+d mode "gaps"
 
+
 #autostart programs
-exec --no-startup-id "compton -b"
+#exec --no-startup-id "compton -b"
 exec --no-startup-id "thunar --daemon &"
+#exec --no-startup-id "xfce4-power-manager"
 exec --no-startup-id "urxvtd -q -o"
 exec --no-startup-id "start-pulseaudio-x11"
 exec --no-startup-id "/usr/lib/polkit-gnome/gtkpolkit &"
 exec --no-startup-id "~/.fehbg"
-exec --no-startup-id "ibus-daemon -drx"
-exec --no-startup-id "unclutter -root"
+exec --no-startup-id "ibus-daemon -rx"
+exec --no-startup-id "unclutter"
 exec --no-startup-id "numlockx"
 exec --no-startup-id "xfce4-volumed-pulse"
-exec --no-startup-id "runonce redshift"
+exec --no-startup-id "redshift"
 exec --no-startup-id "nm-applet"
 
 focus_follows_mouse no
@@ -91,6 +93,7 @@ bindsym $mod+Return exec urxvtc
 bindsym $mod+backslash exec xterm
 bindsym $mod+Shift+q kill
 bindsym $mod+Shift+f exec --no-startup-id "j4-dmenu-desktop --display-binary --dmenu='dmenu -b -i'"
+bindsym $mod+Shift+d exec --no-startup-id "rofi -show window"
 
 bindsym $mod+h focus left
 bindsym $mod+j focus down
@@ -122,17 +125,15 @@ bindsym $mod+Shift+i exec 'smplayer2'
 bindsym $mod+Shift+apostrophe exec "qstardict"
 bindsym $mod+Shift+p exec "thunar"
 bindsym XF86Calculator exec "galculator"
-bindsym $mod+Shift+o exec "google-chrome"
 bindsym XF86WebCam exec "gnome-screenshot -i"
 bindsym Print exec "scrot"
 bindsym XF86Display exec "arandr"
 bindsym $mod+m exec "i3lock -i ~/.i3/lock.png"
-
 #mpd
-bindsym XF86AudioPlay exec "mpc toggle"
-bindsym XF86AudioNext exec "mpc next"
-bindsym XF86AudioPrev exec "mpc prev"
-bindsym XF86AudioStop exec "mpc stop"
+bindsym XF86AudioPlay exec "mpc toggle -q"
+bindsym XF86AudioNext exec "mpc next -q"
+bindsym XF86AudioPrev exec "mpc prev -q"
+bindsym XF86AudioStop exec "mpc stop -q"
 
 #input 
 bindsym $mod+space exec "ibus engine 'xkb:us::eng'"
@@ -174,7 +175,7 @@ mode "resize" {
 		bindsym Down resize grow height 2 px or 2 ppt
 		bindsym Up resize shrink height 2 px or 2 ppt
 		bindsym Right resize grow width 2 px or 2 ppt
-		bindsym Return mode "default"
+		bindsym space mode "default"
 		bindsym Escape mode "default"
 }
 bindsym $mod+r mode "resize"
