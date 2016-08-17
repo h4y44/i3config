@@ -1,4 +1,4 @@
-#vi:setf conf
+#vi:setf i3
 
 client.focused			#3465A4 #116A9D #EEEEEC #3465A487
 client.focused_inactive #555753 #555753 #BABDB6 #888A85
@@ -7,18 +7,17 @@ client.urgent			#EF2929 #CC0000 #EEEEEC #EF2929
 set $mod Mod4
 font pango:Sans 9
 
+#rules
 for_window [class="^.*"] border pixel 2
 for_window [class="Thunar"] floating enable
 for_window [class="Qstardict"] floating enable
 for_window [class="Audacious"] floating enable
 for_window [class="Engrampa"] floating enable
 for_window [class="feh"] floating enable
-for_window [class="Gnome-mpv"] floating enable
 for_window [class="Textadeptjit"] floating enable
 for_window [class="Galculator"] floating enable
 for_window [class="Smplayer2"] floating enable
 for_window [class="Gnome-font-viewer"] floating enable
-for_window [class="Ghex"] floating enable
 for_window [class="Arandr"] floating enable
 for_window [class="Pavucontrol"] floating enable
 for_window [class="XTerm"] floating enable
@@ -26,40 +25,41 @@ for_window [class="Transmission-gtk"] floating enable
 for_window [class="Telegram"] floating enable
 for_window [class="Lxtask"] floating enable
 for_window [class="MuPDF"] floating enable
-for_window [class="Nomacs"] border none
+for_window [class="mpv"] floating enable
 for_window [class="chromium"] border none
 for_window [class="Firefox"] border none
-for_window [class="Termite"] border 1pixel
+for_window [class="Termite"] floating enable
 for_window [class="feh"] border pixel 3
 for_window [class="XTerm"] border 1pixel
 for_window [class="opsu!"] fullscreen
 for_window [class="Zathura"] border 1pixel
 for_window [class="Gimp"] border 1pixel
-for_window [class="Xfce4-notifyd"] border 1pixel
+for_window [class="Xfce4-notifyd"] border none
+for_window [class="Termite"] floating enable
 
 #gaps
-workspace 1 gaps inner 6
-workspace 1 gaps outer 6
+workspace 1 gaps inner 2
+workspace 1 gaps outer 1
 workspace 2 gaps inner 6
 workspace 2 gaps outer 6
 
 #moving floating windows
-mode "moving" {
+mode "M" {
 	bindsym $mod+Tab focus right
 	bindsym k move up 4px
-	bindsym h move left 4px
+	bindsym h move left 6px
 	bindsym j move down 4px
-	bindsym l move right 4px
+	bindsym l move right 6px
 	bindsym Up move up 20px
 	bindsym Down move down 20px
 	bindsym Left move left 20px
 	bindsym Right move right 20px
-	bindsym $mod+t mode "default"
+	bindsym space mode "default"
 	bindsym Escape mode "default"
 }
-bindsym Mod4+t focus floating; mode "moving"
+bindsym $mod+s focus floating; mode "M"
 
-mode "gaps" {
+mode "G" {
 	bindsym k gaps inner current minus 5
 	bindsym j gaps inner current plus 5
 	bindsym h gaps outer current plus 5
@@ -67,30 +67,43 @@ mode "gaps" {
 	bindsym 0	  gaps inner current set 0
 	bindsym space gaps outer current set 0; gaps inner current set 0
 	bindsym Escape mode "default"
-	bindsym Return mode "default"
+	bindsym space mode "default"
 }
-bindsym $mod+d mode "gaps"
+bindsym $mod+d mode "G"
 
+mode "R" {
+		bindsym h resize shrink width 2 px or 2 ppt
+		bindsym j resize grow height 2 px or 2 ppt
+		bindsym k resize shrink height 2 px or 2 ppt
+		bindsym l resize grow width 2 px or 2 ppt
+		bindsym Left resize shrink width 2 px or 2 ppt
+		bindsym Down resize grow height 2 px or 2 ppt
+		bindsym Up resize shrink height 2 px or 2 ppt
+		bindsym Right resize grow width 2 px or 2 ppt
+		bindsym space mode "default"
+		bindsym Escape mode "default"
+}
+bindsym $mod+r mode "R"
 
 #autostart programs
-#exec --no-startup-id "compton -b"
+#exec --no-startup-id "xcompmgr -D 1 -fc -I 1 -O 0 2> /dev/null"
+#exec --no-startup-id "compton --sw-opti -b"
 exec --no-startup-id "thunar --daemon &"
-#exec --no-startup-id "xfce4-power-manager"
-exec --no-startup-id "urxvtd -q -o"
+exec --no-startup-id "urxvtd -q -o -f"
 exec --no-startup-id "start-pulseaudio-x11"
 exec --no-startup-id "/usr/lib/polkit-gnome/gtkpolkit &"
 exec --no-startup-id "~/.fehbg"
-exec --no-startup-id "ibus-daemon -rx"
+exec --no-startup-id "ibus-daemon -drx"
 exec --no-startup-id "unclutter"
-exec --no-startup-id "numlockx"
 exec --no-startup-id "xfce4-volumed-pulse"
 exec --no-startup-id "redshift"
 exec --no-startup-id "nm-applet"
+exec --no-startup-id "mpg123 --quiet ~/.i3/tuturu.mp3"
 
 focus_follows_mouse no
 floating_modifier $mod
 bindsym $mod+Return exec urxvtc
-bindsym $mod+backslash exec xterm
+bindsym $mod+backslash exec termite
 bindsym $mod+Shift+q kill
 bindsym $mod+Shift+f exec --no-startup-id "j4-dmenu-desktop --display-binary --dmenu='dmenu -b -i'"
 bindsym $mod+Shift+d exec --no-startup-id "rofi -show window"
@@ -112,8 +125,6 @@ bindsym $mod+Shift+Right move right
 bindsym $mod+c split h
 bindsym $mod+x split v
 bindsym $mod+f fullscreen toggle
-#bindsym $mod+s layout stacking
-#bindsym $mod+w layout tabbed
 bindsym $mod+e layout toggle split
 bindsym $mod+Shift+space floating toggle
 bindsym $mod+q focus mode_toggle
@@ -121,14 +132,15 @@ bindsym $mod+Shift+s sticky toggle
 
 bindsym $mod+z move scratchpad
 bindsym $mod+a scratchpad show
-bindsym $mod+Shift+i exec 'smplayer2'
 bindsym $mod+Shift+apostrophe exec "qstardict"
-bindsym $mod+Shift+p exec "thunar"
+bindsym $mod+p exec "thunar"
 bindsym XF86Calculator exec "galculator"
 bindsym XF86WebCam exec "gnome-screenshot -i"
 bindsym Print exec "scrot"
+bindsym XF86TouchpadToggle "~/.i3/touchpad"
 bindsym XF86Display exec "arandr"
-bindsym $mod+m exec "i3lock -i ~/.i3/lock.png"
+bindsym $mod+Ctrl+l exec "i3lock -i ~/.i3/lock.png"
+bindsym $mod+Ctrl+s exec "i3lock -i ~/.i3/lock.png && systemctl suspend"
 #mpd
 bindsym XF86AudioPlay exec "mpc toggle -q"
 bindsym XF86AudioNext exec "mpc next -q"
@@ -162,23 +174,8 @@ bindsym $mod+Shift+7 move container to workspace 7
 bindsym $mod+Shift+8 move container to workspace 8
 bindsym $mod+Shift+9 move container to workspace 9
 bindsym $mod+Shift+0 move container to workspace 10
-bindsym $mod+Shift+b reload
-bindsym $mod+Shift+r restart
-bindsym $mod+Shift+e exec "~/.i3/exit_i3"
-
-mode "resize" {
-		bindsym h resize shrink width 2 px or 2 ppt
-		bindsym j resize grow height 2 px or 2 ppt
-		bindsym k resize shrink height 2 px or 2 ppt
-		bindsym l resize grow width 2 px or 2 ppt
-		bindsym Left resize shrink width 2 px or 2 ppt
-		bindsym Down resize grow height 2 px or 2 ppt
-		bindsym Up resize shrink height 2 px or 2 ppt
-		bindsym Right resize grow width 2 px or 2 ppt
-		bindsym space mode "default"
-		bindsym Escape mode "default"
-}
-bindsym $mod+r mode "resize"
+bindsym $mod+Ctrl+r reload
+bindsym $mod+Ctrl+e exec "~/.i3/exit_i3"
 
 bar {
 	i3bar_command i3bar
@@ -188,9 +185,10 @@ bar {
 	colors {
 		background		   #090909
 		focused_workspace  #4c7899 #4c7899 #111111
-		active_workspace   #333333 #5f676a #ffffff
+		active_workspace   #333333 #333333 #ffffff
 		urgent_workspace   #b81515 #b81515 #ffffff
 	}
 }
-bindsym $mod+n bar mode toggle
-bindsym $mod+i bar mode invisible
+
+bindsym $mod+Ctrl+n bar mode toggle
+bindsym $mod+Ctrl+i bar mode invisible
