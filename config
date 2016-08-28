@@ -1,4 +1,4 @@
-#vim:ft=c
+#vim:ft=i3
 client.focused			#3465A4 #116A9D #EEEEEC #3465A487
 client.focused_inactive #555753 #555753 #BABDB6 #888A85
 client.unfocused		#555753 #2E3436 #BABDB6 #888A85
