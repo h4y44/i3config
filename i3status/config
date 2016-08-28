@@ -1,23 +1,31 @@
 general {
-        colors = true
-        color_good = "#00BA11"
-        color_bad = "#CC1616"
-        color_degraded = "#55858E"
-        interval = 2
+	colors = true
+	color_good = "#00BA11"
+	color_bad = "#CC1616"
+	color_degraded = "#55858E"
+	interval = 2
 }
 
 order += "mpd"
-order += "volume master"
+order += "volume 0"
 order += "cpu_usage"
+order += "brightness"
 order += "cpu_temperature 0"
 order += "battery 0"
-order += "tztime local"
+order += "tztime 0"
 
-volume master {
-        format = "♪ %volume"
-		device = "default"
-        mixer = "Master"
-        mixer_idx = 0
+mpd {
+	format_up = "♫ %title - %artist"
+	format_down = "♫ stopped"
+	host = "localhost"
+	port = "6600"
+}
+
+volume 0 {
+	format = "♪ %volume"
+	device = "default"
+	mixer = "Master"
+	mixer_idx = 0
 }
 
 cpu_temperature 0 {
@@ -26,24 +34,23 @@ cpu_temperature 0 {
 }
  
 cpu_usage {
-        format = "❤ %usage"
+	format = "❤ %usage"
 }
  
- 
-tztime local {
-        format = "☯ %a %h %d - %H:%M"
+brightness {
+	format = "☀ %percent"
+	path = "/sys/class/backlight/intel_backlight/brightness"
+	brightness_max = 937
 }
 
 battery 0 {
-		last_full_capacity = false
-        format = "%status %percentage"
-        status_chr = "⚡"
-        status_bat = "☉"
+	last_full_capacity = false
+	format = "%status %percentage"
+	status_chr = "⚡"
+	status_bat = "☉"
 }
 
-mpd {
-	format_up = "♫ %title - %artist"
-	format_down = "♫ stopped"
-	host = "localhost"
-	port = "6600"
+tztime 0{
+	format = "☯ %a %h %d - %H:%M"
 }
+
