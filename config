@@ -1,5 +1,4 @@
-#vi:setf i3
-
+#vim:ft=c
 client.focused			#3465A4 #116A9D #EEEEEC #3465A487
 client.focused_inactive #555753 #555753 #BABDB6 #888A85
 client.unfocused		#555753 #2E3436 #BABDB6 #888A85
@@ -9,13 +8,21 @@ font pango:Sans 9
 
 #rules
 for_window [class="^.*"] border pixel 2
+for_window [class="feh"] border pixel 3
+for_window [class="XTerm"] border 1pixel
+for_window [class="Zathura"] border 1pixel
+for_window [class="chromium"] border none
+for_window [class="Firefox"] border none
+for_window [class="Gimp"] border 1pixel
+for_window [class="Places"] border 1pixel 
+
+for_window [class="Places"] floating enable
 for_window [class="Thunar"] floating enable
 for_window [class="Qstardict"] floating enable
 for_window [class="Audacious"] floating enable
 for_window [class="Engrampa"] floating enable
 for_window [class="feh"] floating enable
 for_window [class="Textadeptjit"] floating enable
-for_window [class="Galculator"] floating enable
 for_window [class="Smplayer2"] floating enable
 for_window [class="Gnome-font-viewer"] floating enable
 for_window [class="Arandr"] floating enable
@@ -26,16 +33,10 @@ for_window [class="Telegram"] floating enable
 for_window [class="Lxtask"] floating enable
 for_window [class="MuPDF"] floating enable
 for_window [class="mpv"] floating enable
-for_window [class="chromium"] border none
-for_window [class="Firefox"] border none
 for_window [class="Termite"] floating enable
-for_window [class="feh"] border pixel 3
-for_window [class="XTerm"] border 1pixel
+for_window [class="Termite"] floating enable
+
 for_window [class="opsu!"] fullscreen
-for_window [class="Zathura"] border 1pixel
-for_window [class="Gimp"] border 1pixel
-for_window [class="Xfce4-notifyd"] border none
-for_window [class="Termite"] floating enable
 
 #gaps
 workspace 1 gaps inner 2
@@ -86,11 +87,8 @@ mode "R" {
 bindsym $mod+r mode "R"
 
 #autostart programs
-#exec --no-startup-id "xcompmgr -D 1 -fc -I 1 -O 0 2> /dev/null"
-#exec --no-startup-id "compton --sw-opti -b"
 exec --no-startup-id "thunar --daemon &"
 exec --no-startup-id "urxvtd -q -o -f"
-exec --no-startup-id "start-pulseaudio-x11"
 exec --no-startup-id "/usr/lib/polkit-gnome/gtkpolkit &"
 exec --no-startup-id "~/.fehbg"
 exec --no-startup-id "ibus-daemon -drx"
@@ -132,28 +130,29 @@ bindsym $mod+Shift+s sticky toggle
 
 bindsym $mod+z move scratchpad
 bindsym $mod+a scratchpad show
-bindsym $mod+Shift+apostrophe exec "qstardict"
+bindsym $mod+apostrophe exec "qstardict"
 bindsym $mod+p exec "thunar"
-bindsym XF86Calculator exec "galculator"
 bindsym XF86WebCam exec "gnome-screenshot -i"
 bindsym Print exec "scrot"
-bindsym XF86TouchpadToggle "~/.i3/touchpad"
 bindsym XF86Display exec "arandr"
+bindsym XF86TouchpadToggle exec "~/.i3/touchpad"
 bindsym $mod+Ctrl+l exec "i3lock -i ~/.i3/lock.png"
 bindsym $mod+Ctrl+s exec "i3lock -i ~/.i3/lock.png && systemctl suspend"
+
 #mpd
 bindsym XF86AudioPlay exec "mpc toggle -q"
 bindsym XF86AudioNext exec "mpc next -q"
 bindsym XF86AudioPrev exec "mpc prev -q"
 bindsym XF86AudioStop exec "mpc stop -q"
 
-#input 
+#input methods
 bindsym $mod+space exec "ibus engine 'xkb:us::eng'"
 bindsym $mod+g exec "ibus engine 'anthy'"
 bindsym $mod+v exec "ibus engine 'Unikey'"
 
 bindsym $mod+Tab focus left
 bindsym $mod+Shift+Tab focus up
+
 bindsym $mod+1 workspace 1
 bindsym $mod+2 workspace 2
 bindsym $mod+3 workspace 3
@@ -164,6 +163,7 @@ bindsym $mod+7 workspace 7
 bindsym $mod+8 workspace 8
 bindsym $mod+9 workspace 9
 bindsym $mod+0 workspace 10
+
 bindsym $mod+Shift+1 move container to workspace 1
 bindsym $mod+Shift+2 move container to workspace 2
 bindsym $mod+Shift+3 move container to workspace 3
@@ -174,6 +174,7 @@ bindsym $mod+Shift+7 move container to workspace 7
 bindsym $mod+Shift+8 move container to workspace 8
 bindsym $mod+Shift+9 move container to workspace 9
 bindsym $mod+Shift+0 move container to workspace 10
+
 bindsym $mod+Ctrl+r reload
 bindsym $mod+Ctrl+e exec "~/.i3/exit_i3"
 
