@@ -102,7 +102,7 @@ mode "launching" {
 bindsym $mod+comma mode "launching"
 
 #autostart programs
-exec --no-startup-id "xcompmgr -f -D 10 -I 10 -O 10 2> /dev/null"
+#exec --no-startup-id "xcompmgr -f -D 10 -I 10 -O 10 2> /dev/null"
 exec --no-startup-id "thunar --daemon &"
 exec --no-startup-id "urxvtd -q -o -f"
 exec --no-startup-id "/usr/lib/polkit-gnome/gtkpolkit &"
@@ -121,8 +121,9 @@ bindsym $mod+Return exec --no-startup-id urxvtc
 bindsym $mod+Shift+Return exec --no-startup-id "urxvtc -e tmux"
 bindsym $mod+backslash exec --no-startup-id termite
 bindsym $mod+Shift+q kill
-bindsym $mod+Shift+f exec --no-startup-id "j4-dmenu-desktop --display-binary --dmenu='dmenu -i'"
-bindsym $mod+Shift+d exec --no-startup-id "rofi -show window"
+bindsym $mod+Shift+f exec --no-startup-id "j4-dmenu-desktop --display-binary --dmenu='dmenu -i -p Run:'"
+bindsym $mod+Shift+d exec --no-startup-id "~/.i3/taskctl"
+bindsym $mod+Shift+w exec --no-startup-id "~/.i3/wirelessctl"
 
 bindsym $mod+u [urgent=latest] focus
 bindsym $mod+h focus left
@@ -180,18 +181,18 @@ bindsym $mod+3 workspace ☘
 bindsym $mod+4 workspace ☸
 bindsym $mod+5 nop
 bindsym $mod+w workspace ⚛
-bindsym $mod+e workspace ⚇
+bindsym $mod+e workspace ☻
 bindsym $mod+r workspace ☯
-bindsym $mod+slash workspace ☻
+bindsym $mod+slash workspace ⚇
 
 bindsym $mod+Shift+1 move container to workspace ☂
 bindsym $mod+Shift+2 move container to workspace ★
 bindsym $mod+Shift+3 move container to workspace ☘
 bindsym $mod+Shift+4 move container to workspace ☸
 bindsym $mod+Shift+w move container to workspace ⚛
-bindsym $mod+Shift+e move container to workspace ⚇
+bindsym $mod+Shift+e move container to workspace ☻
 bindsym $mod+Shift+r move container to workspace ☯
-bindsym $mod+Shift+slash move container to workspace ☻
+bindsym $mod+Shift+slash move container to workspace ⚇
 
 bindsym $mod+Ctrl+r reload
 bindsym $mod+Ctrl+e exec "~/.i3/exit_i3"
