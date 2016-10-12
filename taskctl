@@ -20,6 +20,18 @@ search_a_song() {
 	fi
 }
 
+open_url() {
+	q_key=`cat ~/.urlhist | dmenu -i -p Url:`
+
+	if grep -q "$q_key" "$HOME/.urlhist"; then
+		echo "ok"
+	else
+		echo $q_key >> ~/.urlhist
+	fi
+
+	firefox --new-tab "$q_key"
+}
+
 do_ggsearch() {
 	q_key=`cat ~/.gshist | dmenu -i -p Google:`
 	
@@ -46,25 +58,29 @@ do_dictionary_lookup() {
 	notify-send -u low "`sdcv -n "$q_key" | tail -n +4 | head -30`"
 }
 
-control="1: add new folder\n2: search for a song\n3: clear mpd playlist\n4: do a google search\n5: dictionary lookup"
+control="m1: add folder\nm2: search\nm3: clear playlist\nw1: google search\nw2: goto url\ns1: dictionary lookup"
 choose=`printf "$control" | dmenu -i -p Task:`
 case $choose in
-"1:"*)
+"m1:"*)
 	sleep 0.1
 	add_new_folder
 	;;
-"2:"*)
+"m2:"*)
 	sleep 0.1
 	search_a_song
 	;;
-"3:"*)
+"m3:"*)
 	mpc clear
 	;;
-"4:"*)
+"w1:"*)
 	sleep 0.1
 	do_ggsearch
 	;;
-"5:"*)
+"w2:"*)
+	sleep 0.1
+	open_url
+	;;
+"s1:"*)
 	sleep 0.1
 	do_dictionary_lookup;;
 esac
