@@ -43,7 +43,7 @@ do_dictionary_lookup() {
 		echo $q_key >> ~/.dicthist
 	fi
 
-	notify-send "`sdcv -n "$q_key" | tail -n +4 | head -30`"
+	notify-send -u low "`sdcv -n "$q_key" | tail -n +4 | head -30`"
 }
 
 control="1: add new folder\n2: search for a song\n3: clear mpd playlist\n4: do a google search\n5: dictionary lookup"
