@@ -2,7 +2,7 @@
 # vim :setf sh
 icon_e="input-touchpad-symbolic"
 icon_d="touchpad-disabled-symbolic"
-state=$(xinput --list-props 'ETPS/2 Elantech Touchpad' | grep 'Device Enabled (138):	1')
+state=$(xinput --list-props 'ETPS/2 Elantech Touchpad' | grep -P 'Device Enabled(.*)\t1')
 
 if [[ -z $state ]]; then
 	xinput --enable 'ETPS/2 Elantech Touchpad'
