@@ -1,4 +1,9 @@
 #!/bin/dash
+# vim:set ft=sh:
+
+_URLHIST="$HOME/.i3/log/urlhist"
+_GSHIST="$HOME/.i3/log/gshist"
+_DICTHIST="$HOME/.i3/log/dicthist"
 
 add_new_folder() {
 	cd ~/Music
@@ -21,24 +26,26 @@ search_a_song() {
 }
 
 open_url() {
-	q_key=`cat ~/.urlhist | dmenu -i -p Url:`
+	q_key=`cat $_URLHIST | dmenu -i -p Url:`
 
-	if grep -q "$q_key" "$HOME/.urlhist"; then
+	if grep -q "$q_key" $_URLHIST; then
 		echo "ok"
 	else
-		echo $q_key >> ~/.urlhist
+		echo $q_key >> $_URLHIST
 	fi
 
-	firefox --new-tab "$q_key"
+	if ! [ -z "$q_key" ]; then
+		firefox --new-tab "$q_key"
+	fi
 }
 
 do_ggsearch() {
-	q_key=`cat ~/.gshist | dmenu -i -p Google:`
+	q_key=`cat $_GSHIST | dmenu -i -p Google:`
 	
-	if grep -q "$q_key" "$HOME/.gshist" ; then
+	if grep -q "$q_key" $_GSHIST ; then
 		echo "ok"
 	else
-		echo $q_key >> ~/.gshist
+		echo $q_key >> $_GSHIST 
 	fi
 
 	if ! [ -z "$q_key" ]; then
@@ -47,18 +54,18 @@ do_ggsearch() {
 }
 
 do_dictionary_lookup() {
-	q_key=`cat ~/.dicthist | dmenu -i -p Keyword:`
+	q_key=`cat $_DICTHIST | dmenu -i -p Keyword:`
 	
-	if grep -q "$q_key" "$HOME/.dicthist"; then
+	if grep -q "$q_key" $_DICTHIST; then
 		echo "ok"
 	else
-		echo $q_key >> ~/.dicthist
+		echo $q_key >> $_DICTHIST
 	fi
 
 	notify-send -u low "`sdcv -n "$q_key" | tail -n +4 | head -30`"
 }
 
-control="m1: add folder\nm2: search\nm3: clear playlist\nw1: google search\nw2: goto url\ns1: dictionary lookup"
+control="m1: add folder\nm2: search\nm3: clear playlist\nw1: google search\nw2: goto url\nu1: take screenshot\ns1: dictionary lookup"
 choose=`printf "$control" | dmenu -i -p Task:`
 case $choose in
 "m1:"*)
@@ -79,6 +86,10 @@ case $choose in
 "w2:"*)
 	sleep 0.1
 	open_url
+	;;
+"u1:"*)
+	sleep 0.5
+	maim -s
 	;;
 "s1:"*)
 	sleep 0.1

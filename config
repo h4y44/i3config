@@ -1,10 +1,11 @@
+# vim:set ts=4 sw=4 ft=i3 et:
 client.focused			#455974 #3B667F #EEEEEC #3465A4
 client.focused_inactive #555753 #555753 #BABDB6 #888A85
 client.unfocused		#555753 #2E3436 #BABDB6 #888A85
 client.urgent			#EF2929 #CC0000 #EEEEEC #EF2929
 set $mod Mod4
-font pango:Sans 9
-
+font pango:Sans 0
+force_focus_wrapping yes
 #rules
 for_window [class="^.*"] border pixel 2
 for_window [class="feh"] border pixel 3
@@ -17,24 +18,25 @@ for_window [title="Private Browsing$"] border pixel 3
 for_window [class="Gimp"] border 1pixel
 for_window [class="Wps"] border none
 for_window [class="010editor"] border 1pixel
+for_window [class="EME"] border 1pixel
 
 for_window [window_role="pop-up"] floating enable
 for_window [window_role="task_dialog"] floating enable
+for_window [class="__TEST__"] floating enable
 
-for_window [class="Thunar"] floating enable
+for_window [class="Spacefm"] floating enable
 for_window [class="Qstardict"] floating enable
 for_window [class="Audacious"] floating enable
 for_window [class="Engrampa"] floating enable
 for_window [class="feh"] floating enable
-for_window [class="Textadeptjit"] floating enable
-for_window [class="Smplayer"] floating enable
+for_window [class="Howl"] floating enable
+for_window [class="MPlayer"] floating enable
 for_window [class="Gnome-font-viewer"] floating enable
 for_window [class="Arandr"] floating enable
 for_window [class="Pavucontrol"] floating enable
 for_window [class="XTerm"] floating enable
 for_window [class="Transmission-gtk"] floating enable
 for_window [class="Telegram"] floating enable
-for_window [class="Lxtask"] floating enable
 for_window [class="MuPDF"] floating enable
 for_window [class="mpv"] floating enable
 for_window [class="Termite"] floating enable
@@ -45,10 +47,10 @@ workspace ☂ gaps inner 2
 workspace ☂ gaps outer 1
 workspace ★ gaps inner 6
 workspace ★ gaps outer 6
-workspace ⚛ gaps inner 2
-workspace ⚛ gaps outer 1
-workspace ⚇ gaps inner 6
-workspace ⚇ gaps outer 6
+workspace ☉ gaps inner 2
+workspace ☉ gaps outer 1
+workspace ☢ gaps inner 6
+workspace ☢ gaps outer 6
 
 #moving floating windows
 mode "moving" {
@@ -95,7 +97,7 @@ bindsym $mod+b mode "resizing"
 
 mode "launching" {
 	bindsym f exec --no-startup-id "/usr/bin/firefox"
-	bindsym t exec --no-startup-id "thunar"
+	bindsym s exec --no-startup-id "spacefm"
 	bindsym u exec --no-startup-id "urxvtc"
 	bindsym Escape mode "default"
 }
@@ -103,7 +105,7 @@ bindsym $mod+comma mode "launching"
 
 #autostart programs
 #exec --no-startup-id "xcompmgr -f -D 10 -I 10 -O 10 2> /dev/null"
-exec --no-startup-id "thunar --daemon &"
+exec --no-startup-id "spacefm -d > /dev/null 2>&1"
 exec --no-startup-id "urxvtd -q -o -f"
 exec --no-startup-id "/usr/lib/polkit-gnome/gtkpolkit &"
 exec --no-startup-id "~/.fehbg"
@@ -122,8 +124,8 @@ bindsym $mod+Shift+Return exec --no-startup-id "urxvtc -e tmux"
 bindsym $mod+backslash exec --no-startup-id termite
 bindsym $mod+Shift+q kill
 bindsym $mod+Shift+f exec --no-startup-id "j4-dmenu-desktop --display-binary --dmenu='dmenu -i -p Run:'"
-bindsym $mod+Shift+d exec --no-startup-id "~/.i3/taskctl"
-bindsym $mod+Shift+w exec --no-startup-id "~/.i3/wirelessctl"
+bindsym $mod+Shift+d exec --no-startup-id "~/.i3/taskctl > ~/.i3/log/last.log"
+bindsym $mod+Shift+c exec --no-startup-id "~/.i3/networkctl"
 
 bindsym $mod+u [urgent=latest] focus
 bindsym $mod+h focus left
@@ -150,8 +152,7 @@ bindsym $mod+Shift+s sticky toggle
 
 bindsym $mod+z move scratchpad
 bindsym $mod+a scratchpad show
-bindsym $mod+apostrophe exec "qstardict"
-bindsym $mod+p exec --no-startup-id "thunar"
+bindsym $mod+p exec --no-startup-id "spacefm"
 bindsym Print exec "scrot"
 bindsym XF86Display exec "arandr"
 bindsym XF86TouchpadToggle exec "~/.i3/touchpad"
@@ -180,8 +181,8 @@ bindsym $mod+2 workspace ★
 bindsym $mod+3 workspace ☘
 bindsym $mod+4 workspace ☸
 bindsym $mod+5 nop
-bindsym $mod+w workspace ⚛
-bindsym $mod+e workspace ☻
+bindsym $mod+w workspace ☉
+bindsym $mod+e workspace ☢
 bindsym $mod+r workspace ☯
 bindsym $mod+slash workspace ⚇
 
@@ -189,8 +190,8 @@ bindsym $mod+Shift+1 move container to workspace ☂
 bindsym $mod+Shift+2 move container to workspace ★
 bindsym $mod+Shift+3 move container to workspace ☘
 bindsym $mod+Shift+4 move container to workspace ☸
-bindsym $mod+Shift+w move container to workspace ⚛
-bindsym $mod+Shift+e move container to workspace ☻
+bindsym $mod+Shift+w move container to workspace ☉
+bindsym $mod+Shift+e move container to workspace ☢
 bindsym $mod+Shift+r move container to workspace ☯
 bindsym $mod+Shift+slash move container to workspace ⚇
 
@@ -204,7 +205,7 @@ bar {
 	workspace_buttons yes
 	bindsym button1 nop
 	bindsym button2 exec "mpc toggle -q"
-	bindsym button3 nop
+	bindsym button3 exec "mpc next"
 	bindsym button4 workspace ☂
 	bindsym button5 workspace ☘
 	font pango:"Sans" 8
