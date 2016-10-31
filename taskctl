@@ -62,7 +62,7 @@ do_dictionary_lookup() {
 		echo $q_key >> $_DICTHIST
 	fi
 
-	notify-send -u low "`sdcv -n "$q_key" | tail -n +4 | head -30`"
+	notify-send -u low "`sdcv -u en_vi -n "$q_key" | tail -n +4 | head -30`"
 }
 
 control="m1: add folder\nm2: search\nm3: clear playlist\nw1: google search\nw2: goto url\nu1: take screenshot\ns1: dictionary lookup"

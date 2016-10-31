@@ -1,11 +1,12 @@
-# vim:set ts=4 sw=4 ft=i3 et:
-client.focused			#455974 #3B667F #EEEEEC #3465A4
+# vim:set ft=i3 et:
+client.focused          #455974 #3B667F #EEEEEC #3465A4
 client.focused_inactive #555753 #555753 #BABDB6 #888A85
-client.unfocused		#555753 #2E3436 #BABDB6 #888A85
-client.urgent			#EF2929 #CC0000 #EEEEEC #EF2929
+client.unfocused        #555753 #2E3436 #BABDB6 #888A85
+client.urgent           #EF2929 #CC0000 #EEEEEC #EF2929
 set $mod Mod4
 font pango:Sans 0
 force_focus_wrapping yes
+
 #rules
 for_window [class="^.*"] border pixel 2
 for_window [class="feh"] border pixel 3
@@ -16,7 +17,8 @@ for_window [class="Pale moon"] border none
 for_window [class="Firefox"] border none, layout tabbed
 for_window [title="Private Browsing$"] border pixel 3
 for_window [class="Gimp"] border 1pixel
-for_window [class="Wps"] border none
+for_window [class="Opera"] border none
+for_window [class="Nomacs"] border none
 for_window [class="010editor"] border 1pixel
 for_window [class="EME"] border 1pixel
 
@@ -25,7 +27,7 @@ for_window [window_role="task_dialog"] floating enable
 for_window [class="__TEST__"] floating enable
 
 for_window [class="Spacefm"] floating enable
-for_window [class="Qstardict"] floating enable
+for_window [class="Smplayer2"] floating enable
 for_window [class="Audacious"] floating enable
 for_window [class="Engrampa"] floating enable
 for_window [class="feh"] floating enable
@@ -42,6 +44,8 @@ for_window [class="mpv"] floating enable
 for_window [class="Termite"] floating enable
 for_window [class="Lxappearance"] floating enable
 
+for_window [class="teeworlds"] fullscreen enable
+
 #gaps
 workspace ☂ gaps inner 2
 workspace ☂ gaps outer 1
@@ -54,52 +58,52 @@ workspace ☢ gaps outer 6
 
 #moving floating windows
 mode "moving" {
-	bindsym $mod+Tab focus right
-	bindsym k move up 4px
-	bindsym h move left 6px
-	bindsym j move down 4px
-	bindsym l move right 6px
-	bindsym Up move up 20px
-	bindsym Down move down 20px
-	bindsym Left move left 20px
-	bindsym Right move right 20px
-	bindsym space mode "default"
-	bindsym Escape mode "default"
+    bindsym $mod+Tab focus right
+    bindsym k move up 4px
+    bindsym h move left 6px
+    bindsym j move down 4px
+    bindsym l move right 6px
+    bindsym Up move up 20px
+    bindsym Down move down 20px
+    bindsym Left move left 20px
+    bindsym Right move right 20px
+    bindsym space mode "default"
+    bindsym Escape mode "default"
 }
 bindsym $mod+m focus floating; mode "moving"
 
 mode "gaps" {
-	bindsym k gaps inner current minus 5
-	bindsym j gaps inner current plus 5
-	bindsym h gaps outer current plus 5
-	bindsym l gaps outer current minus 5
-	bindsym 0	  gaps inner current set 0
-	bindsym space gaps outer current set 0; gaps inner current set 0
-	bindsym Escape mode "default"
-	bindsym space mode "default"
+    bindsym k gaps inner current minus 5
+    bindsym j gaps inner current plus 5
+    bindsym h gaps outer current plus 5
+    bindsym l gaps outer current minus 5
+    bindsym 0     gaps inner current set 0
+    bindsym space gaps outer current set 0; gaps inner current set 0
+    bindsym Escape mode "default"
+    bindsym space mode "default"
 }
 bindsym $mod+n mode "gaps"
 
 mode "resizing" {
-	bindsym h resize shrink width 2 px or 2 ppt
-	bindsym j resize grow height 2 px or 2 ppt
-	bindsym k resize shrink height 2 px or 2 ppt
-	bindsym l resize grow width 2 px or 2 ppt
-	bindsym Left resize shrink width 2 px or 2 ppt
-	bindsym Down resize grow height 2 px or 2 ppt
-	bindsym Up resize shrink height 2 px or 2 ppt
-	bindsym Right resize grow width 2 px or 2 ppt
-	bindsym space mode "default"
-	bindsym Escape mode "default"
-	bindsym Tab mode "default"
+    bindsym h resize shrink width 2 px or 2 ppt
+    bindsym j resize grow height 2 px or 2 ppt
+    bindsym k resize shrink height 2 px or 2 ppt
+    bindsym l resize grow width 2 px or 2 ppt
+    bindsym Left resize shrink width 2 px or 2 ppt
+    bindsym Down resize grow height 2 px or 2 ppt
+    bindsym Up resize shrink height 2 px or 2 ppt
+    bindsym Right resize grow width 2 px or 2 ppt
+    bindsym space mode "default"
+    bindsym Escape mode "default"
+    bindsym Tab mode "default"
 }
 bindsym $mod+b mode "resizing"
 
 mode "launching" {
-	bindsym f exec --no-startup-id "/usr/bin/firefox"
-	bindsym s exec --no-startup-id "spacefm"
-	bindsym u exec --no-startup-id "urxvtc"
-	bindsym Escape mode "default"
+    bindsym f exec --no-startup-id "/usr/bin/firefox"
+    bindsym s exec --no-startup-id "spacefm"
+    bindsym u exec --no-startup-id "urxvtc"
+    bindsym Escape mode "default"
 }
 bindsym $mod+comma mode "launching"
 
@@ -112,7 +116,6 @@ exec --no-startup-id "~/.fehbg"
 exec --no-startup-id "ibus-daemon -drx"
 exec --no-startup-id "unclutter"
 exec --no-startup-id "dunst&"
-exec --no-startup-id "xfce4-volumed-pulse"
 exec --no-startup-id "[ $(pgrep redshift) ] || redshift"
 exec --no-startup-id "numlockx"
 exec --no-startup-id "mpg123 --quiet ~/.i3/tuturu.mp3"
@@ -121,6 +124,7 @@ focus_follows_mouse no
 floating_modifier $mod
 bindsym $mod+Return exec --no-startup-id urxvtc
 bindsym $mod+Shift+Return exec --no-startup-id "urxvtc -e tmux"
+bindsym $mod+o exec --no-startup-id "urxvtc"
 bindsym $mod+backslash exec --no-startup-id termite
 bindsym $mod+Shift+q kill
 bindsym $mod+Shift+f exec --no-startup-id "j4-dmenu-desktop --display-binary --dmenu='dmenu -i -p Run:'"
@@ -156,6 +160,9 @@ bindsym $mod+p exec --no-startup-id "spacefm"
 bindsym Print exec "scrot"
 bindsym XF86Display exec "arandr"
 bindsym XF86TouchpadToggle exec "~/.i3/touchpad"
+bindsym XF86AudioRaiseVolume exec "amixer -q -D pulse sset Master 5%+"
+bindsym XF86AudioLowerVolume exec "amixer -q -D pulse sset Master 5%-"
+bindsym XF86AudioMute exec "amixer -q -D pulse sset Master toggle"
 bindsym $mod+Ctrl+l exec "i3lock -i ~/.i3/lock.png"
 bindsym $mod+Ctrl+s exec "i3lock -i ~/.i3/lock.png && systemctl suspend"
 
@@ -199,26 +206,24 @@ bindsym $mod+Ctrl+r reload
 bindsym $mod+Ctrl+e exec "~/.i3/exit_i3"
 
 bar {
-	i3bar_command i3bar
-	status_command i3status
-	position top
-	workspace_buttons yes
-	bindsym button1 nop
-	bindsym button2 exec "mpc toggle -q"
-	bindsym button3 exec "mpc next"
-	bindsym button4 workspace ☂
-	bindsym button5 workspace ☘
-	font pango:"Sans" 8
-	height 16
-	colors {
-		background		   #090909
-		focused_workspace  #4c7899 #4c7899 #111111
-		active_workspace   #333333 #333333 #ffffff
-		urgent_workspace   #b81515 #b81515 #ffffff
-	}
+    i3bar_command i3bar
+    status_command i3status
+    position top
+    workspace_buttons yes
+    bindsym button1 nop
+    bindsym button2 exec "mpc toggle -q"
+    bindsym button3 exec "mpc next"
+    bindsym button4 workspace ☂
+    bindsym button5 workspace ☘
+    font pango:"Sans" 8
+    height 16
+    colors {
+        background         #090909
+        focused_workspace  #4c7899 #4c7899 #111111
+        active_workspace   #333333 #333333 #ffffff
+        urgent_workspace   #b81515 #b81515 #ffffff
+    }
 }
 
 bindsym $mod+Ctrl+n bar mode toggle
 bindsym $mod+Ctrl+i bar mode invisible
-
-#vim: ft = i3:
